@@ -1,4 +1,8 @@
-
+/**
+	This KdTree uses KdTree algorithm to support an efficient implementation of searching for points in the point set in a retangle and finding
+	the nearest point in the point set given a point.
+	The requirement of the algorithm is desribed in http://coursera.cs.princeton.edu/algs4/assignments/kdtree.html
+**/
 import edu.princeton.cs.algs4.*;
 public class KdTree {
 	private Node root;
@@ -10,8 +14,8 @@ public class KdTree {
 			private Node left;
 			private Node right;
 			
-			//construct new node with given point and depth in the tree
-			private Node(Point2D p, int depth)
+			//construct new node with given point in the tree
+			private Node(Point2D p)
 			{
 				this.p = p;
 				this.left = null;
@@ -20,39 +24,40 @@ public class KdTree {
 			
 		}
 		
-		
-	
 	public KdTree()
 	{
 		root = null;
 		size = 0;
 	}
-	
+	//return size of the tree
 	public int size()
 	{
 		return size;
 	}
-	
+	//return if the tree is empty
 	public boolean isEmpty()
 	{
 		return (size == 0);
 	}
-	
+	//return if the tree contains a point p
 	public boolean contains(Point2D p)
 	{
 		return (contains(root, p, 0));
 	}
-	
+	//recursively find if the tree rooted at root at depth contains the point p
 	private boolean contains(Node root, Point2D p, int depth)
 	{
+		
 		if (root == null)
 			return false;
 		else
 		{
+			//if root is the point, return
 			if (root.p.equals(p))
 				return true;
 			else
 			{
+				// search for the point in the left or right tree according the branch
 				if (depth % 2 == 0)
 				{
 					if (p.x() < root.p.x())
@@ -78,6 +83,7 @@ public class KdTree {
 			throw new java.lang.IllegalArgumentException();
 		root = insert(root, p, 0);
 	}
+	//recursively insert the point p
 	private Node insert(Node root, Point2D p, int depth)
 	{
 		if (root == null)
