@@ -1,4 +1,3 @@
-package code;
 import edu.princeton.cs.algs4.*;
 import java.util.ArrayList;
 public class WordNet {
